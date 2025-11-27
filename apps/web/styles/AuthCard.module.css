@@ -1,0 +1,84 @@
+.header {
+    margin-bottom: 0.75rem;
+}
+
+.title {
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.description {
+    margin: 0.35rem 0 0;
+    color: #c9bde5;
+}
+
+.auth {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.authText {
+    margin: 0;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.connectionRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.connectionMeta {
+    display: flex;
+    gap: 0.65rem;
+    align-items: center;
+}
+
+.connectionName {
+    margin: 0;
+    font-weight: 600;
+}
+
+.connectionSubtitle {
+    color: #c9bde5;
+}
+
+.statusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--badge-color);
+}
+
+.statusBadgeConnected {
+    --badge-color: #8ff0ae;
+}
+
+.statusBadgeDisconnected {
+    --badge-color: #ffdf91;
+}
+
+.statusDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 12px currentColor;
+}
+
+.hint {
+    color: #c9bde5;
+}
+
+.footer {
+    margin-top: 0.75rem;
+}

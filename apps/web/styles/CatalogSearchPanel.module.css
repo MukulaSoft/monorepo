@@ -1,0 +1,102 @@
+.panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.selectionDefault {
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    background: rgba(8, 8, 16, 0.35);
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.selectionTitle {
+    display: block;
+}
+
+.selectionHint {
+    color: #c9bde5;
+}
+
+.selectionActive {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(143, 240, 174, 0.35);
+    background: rgba(143, 240, 174, 0.08);
+}
+
+.selectionContent {
+    flex: 1;
+}
+
+.selectionProvider {
+    color: #c9bde5;
+}
+
+.selectionClearButton {
+    margin-left: auto;
+}
+
+.resultsList {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.resultsStatus {
+    color: #c9bde5;
+}
+
+.resultsError {
+    color: #ff9e9e;
+}
+
+.resultsEmpty {
+    color: #c9bde5;
+}
+
+.resultButton {
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(8, 8, 16, 0.35);
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    cursor: pointer;
+    color: inherit;
+    text-align: left;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.resultButtonActive {
+    border-color: #8ff0ae;
+    background: rgba(143, 240, 174, 0.08);
+}
+
+.resultInfo {
+    flex: 1;
+    text-align: left;
+}
+
+.resultTitle {
+    display: block;
+}
+
+.resultSubtitle {
+    color: #c9bde5;
+}
+
+.resultType {
+    margin-left: auto;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+    color: #9fb8ff;
+}

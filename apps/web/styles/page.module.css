@@ -1,0 +1,45 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.brand {
+    font-family: var(--font-brand);
+    font-size: 1.4rem;
+}
+
+.navLinks {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navLink {
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.navLinkConnections {
+    color: #8ff0ae;
+}
+
+.navLinkDocs {
+    color: #9fb8ff;
+}
+
+.introCard {
+    margin-bottom: 1.5rem;
+}
+
+.introTitle {
+    margin: 0 0 0.35rem;
+}
+
+.introDescription {
+    margin: 0;
+}

@@ -1,0 +1,88 @@
+.stage {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: minmax(0, 2.1fr) minmax(260px, 1fr);
+    align-items: start;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.formHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.formDescription {
+    margin: 0;
+    color: #c9bde5;
+}
+
+.formError {
+    margin: 0;
+    color: #ff9e9e;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.resultsActions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.resultsHeading {
+    margin: 0;
+}
+
+.resultsDescription {
+    margin: 0.35rem 0 0;
+    color: #c9bde5;
+}
+
+.resultsButtons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.resultsError {
+    margin: 0.75rem 0 0;
+    color: #ff9e9e;
+}
+
+.emptyStateText {
+    margin: 0;
+}
+
+.emptyStateHint {
+    color: #c9bde5;
+}
+
+@media (max-width: 960px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

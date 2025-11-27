@@ -1,0 +1,36 @@
+.glyph {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1rem;
+    background: rgba(159, 184, 255, 0.15);
+    color: #9fb8ff;
+}
+
+.compact {
+    width: 24px;
+    height: 24px;
+    font-size: 0.85rem;
+}
+
+.spotify {
+    background: rgba(29, 185, 84, 0.18);
+    color: #1db954;
+}
+
+.appleMusic {
+    background: rgba(252, 60, 68, 0.18);
+    color: #fc3c44;
+}
+
+.youtubeMusic {
+    background: rgba(255, 79, 79, 0.18);
+    color: #ff4f4f;
+}
+
+.youtube {
+    background: rgba(255, 79, 79, 0.18);
+    color: #ff4f4f;
+}

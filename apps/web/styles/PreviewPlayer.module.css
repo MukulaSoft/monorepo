@@ -1,0 +1,25 @@
+.player {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.playerHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.timestamp {
+    font-size: 0.85rem;
+    color: #c9bde5;
+}
+
+.slider {
+    width: 100%;
+    pointer-events: none;
+}
+
+.hiddenAudio {
+    display: none;
+}

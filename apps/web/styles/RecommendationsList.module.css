@@ -1,0 +1,162 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.title {
+    margin-bottom: 0.35rem;
+}
+
+.description {
+    margin: 0;
+    color: #c9bde5;
+}
+
+.metadataGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.metadataStatus {
+    font-size: 0.85rem;
+}
+
+.metadataStatusReady {
+    color: #8ff0ae;
+}
+
+.metadataStatusPending {
+    color: #ffdf91;
+}
+
+.refreshButton {
+    white-space: nowrap;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.card {
+    height: 100%;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.trackRow {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.artworkImage {
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.artworkFallback {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    display: grid;
+    place-items: center;
+    color: #c9bde5;
+    font-size: 1.25rem;
+}
+
+.trackInfo {
+    flex: 1;
+}
+
+.trackTitle {
+    margin: 0;
+    font-weight: 600;
+}
+
+.trackArtists {
+    margin: 0.15rem 0;
+    color: #c9bde5;
+}
+
+.trackReason {
+    color: #9fb8ff;
+}
+
+.primaryProvider {
+    margin-top: 0.35rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.primaryProviderLabel {
+    color: #c9bde5;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.buttonRow {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.providerButton {
+    flex: 1 1 140px;
+}
+
+.providerButtonContent {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.badge {
+    border-radius: 999px;
+    padding: 0.15rem 0.65rem;
+    font-size: 0.8rem;
+    border: 1px solid currentColor;
+    color: currentColor;
+}
+
+.badgeMint {
+    color: #8ff0ae;
+}
+
+.badgeIris {
+    color: #9fb8ff;
+}
+
+.badgePeach {
+    color: #ffc9a6;
+}
+
+.badgeLavender {
+    color: #c1b5ff;
+}

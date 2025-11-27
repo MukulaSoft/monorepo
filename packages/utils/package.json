@@ -1,0 +1,17 @@
+{
+    "name": "@mukulasoft/utils",
+    "version": "0.1.0",
+    "private": true,
+    "sideEffects": false,
+    "files": [
+        "dist"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/index.d.js",
+    "scripts": {
+        "format": "prettier --write ."
+    },
+    "devDependencies": {
+        "prettier": "^3.6.2"
+    }
+}

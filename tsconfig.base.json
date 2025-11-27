@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es2022",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "strict": true,
+        "allowJs": false,
+        "noEmit": true,
+        "jsx": "preserve",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": {
+            "@mukulasoft/ui": ["packages/ui/src"],
+            "@mukulasoft/database": ["packages/database/src"],
+            "@mukulasoft/utils": ["packages/utils/src"],
+            "@mukulasoft/commons": ["packages/commons/src"],
+            "@account/*": ["apps/account/src/*"]
+        }
+    }
+}
