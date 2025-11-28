@@ -16,7 +16,8 @@ const serviceModules = [
 ]
 
 const roadmapHighlights = [
-    'First-class operations dashboard for curators and promotions teams.',
+    'Two-factor authentication flows so every workspace can enforce strong login policies.',
+    'Notifications settings center that lets admins manage email and in-app alerts per team.',
     'Webhook + GraphQL APIs so you can automate delivery to any downstream client.',
     'AI-assisted QA to flag metadata gaps before you publish playlists or lineups.',
 ]
