@@ -9,6 +9,7 @@
     "types": "dist/index.d.ts",
     "scripts": {
         "build": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --tsconfig tsconfig.json",
+        "prepublishOnly": "pnpm run build",
         "format": "prettier --write ."
     },
     "peerDependencies": {

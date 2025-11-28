@@ -1,11 +1,15 @@
 {
     "name": "@mukulasoft/commons",
     "version": "0.1.0",
-    "private": true,
-    "main": "src/index.ts",
-    "types": "src/index.ts",
+    "private": false,
+    "files": [
+        "dist"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
-        "build": "tsc -p tsconfig.json --noEmit",
+        "build": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --tsconfig tsconfig.json",
+        "prepublishOnly": "pnpm run build",
         "lint": "eslint ."
     },
     "dependencies": {
@@ -13,5 +17,8 @@
     },
     "peerDependencies": {
         "@mukulasoft/utils": "workspace:*"
+    },
+    "devDependencies": {
+        "tsup": "^8.5.1"
     }
 }
