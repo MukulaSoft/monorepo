@@ -1,3 +1,5 @@
+'use client'
+
 import { LayoutShell, Card } from '@mukulasoft/ui'
 import { RecommenderClient } from '../../components/RecommenderClient'
 import styles from '../../styles/page.module.css'
