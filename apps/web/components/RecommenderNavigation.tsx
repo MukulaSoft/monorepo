@@ -10,7 +10,8 @@ export function RecommenderNavigation() {
     const { user, logout, loading } = useAuth()
 
     const items: NavigationItem[] = [
-        { label: 'Portfolio', href: 'http://localhost:3000', external: true },
+        { label: 'Home', href: '/', active: pathname === '/' },
+        { label: 'Song recommender', href: '/song-recommender' },
         {
             label: 'Account',
             href: '/account',
@@ -30,7 +31,7 @@ export function RecommenderNavigation() {
         <NavigationBar
             brand={
                 <Link
-                    href='http://localhost:3000'
+                    href='/'
                     style={{ color: 'inherit', textDecoration: 'none' }}
                 >
                     MukulaSoft

@@ -1,6 +1,6 @@
 import { LayoutShell, Card } from '@mukulasoft/ui'
 import { RecommenderClient } from '../../components/RecommenderClient'
-import styles from './styles/page.module.css'
+import styles from '../../styles/page.module.css'
 import { RecommenderNavigation } from '../../components/RecommenderNavigation'
 
 export default function HomePage() {

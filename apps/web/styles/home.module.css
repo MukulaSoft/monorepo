@@ -1,0 +1,269 @@
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 1.5rem 0 3rem;
+}
+
+.heroSection {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(260px, 1fr);
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.heroCopy {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.eyebrow {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: #c9bde5;
+    margin: 0;
+}
+
+.heroTitle {
+    margin: 0;
+    font-size: clamp(2.25rem, 4vw, 3.25rem);
+    line-height: 1.1;
+}
+
+.heroDescription {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #dcd4ee;
+}
+
+.heroActions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.primaryCta,
+.secondaryCta {
+    border-radius: 999px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.primaryCta {
+    background: linear-gradient(120deg, #9ef0ff, #8ff0ae);
+    color: #06222d;
+}
+
+.secondaryCta {
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #f8f5ff;
+}
+
+.primaryCta:hover,
+.secondaryCta:hover {
+    transform: translateY(-1px);
+}
+
+.heroHint {
+    margin: 0;
+    color: #c9bde5;
+}
+
+.heroPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.panelTitle {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: #c9bde5;
+}
+
+.statGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.statCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.statValue {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.statLabel {
+    color: #c9bde5;
+    font-size: 0.95rem;
+}
+
+.featuresSection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+}
+
+.featureCard {
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.featureTitle {
+    margin: 0;
+}
+
+.featureDescription {
+    margin: 0;
+    color: #dcd4ee;
+}
+
+.recommenderSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.recommenderIntro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.platformSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.platformCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.platformList {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    color: #dcd4ee;
+}
+
+.solutionsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.solutionsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.solutionCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.badge {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: #9ef0ff;
+}
+
+.servicesSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.servicesHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.servicesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+}
+
+.serviceCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 220px;
+}
+
+.serviceMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.serviceStatus {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9ef0ff;
+}
+
+.serviceLink {
+    margin-top: auto;
+    color: #8ff0ae;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.serviceLink:hover {
+    text-decoration: underline;
+}
+
+.roadmapSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.roadmapList {
+    margin: 0 0 1rem;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.roadmapCta {
+    margin: 0;
+    color: #c9bde5;
+}
+
+@media (max-width: 1024px) {
+    .heroSection {
+        grid-template-columns: 1fr;
+    }
+}

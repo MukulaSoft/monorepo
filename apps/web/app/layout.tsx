@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { Providers } from './providers'
 
 export const metadata: Metadata = {
-    title: 'MukulaSoft',
-    description: 'MukulaSoft',
+    title: 'MukulaSoft | Song Recommender',
+    description:
+        'MukulaSoft helps you spin up blended song recommendations across the services you love.',
 }
 
 export default function RootLayout({
@@ -13,7 +15,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang='en'>
-            <body>{children}</body>
+            <body>
+                <Providers>{children}</Providers>
+            </body>
         </html>
     )
 }
