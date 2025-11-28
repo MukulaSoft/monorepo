@@ -11,7 +11,7 @@ const serviceModules = [
         status: 'Live now',
         description:
             'Search, personalize, and export mixes powered by MukulaSoft data contracts and taste models.',
-        href: '/#recommender',
+        href: '/song-recommender',
     },
 ]
 
