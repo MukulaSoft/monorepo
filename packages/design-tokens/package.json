@@ -1,6 +1,6 @@
 {
   "name": "@mukulasoft/design-tokens",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Design tokens consumed by MukulaSoft applications",
   "private": false,
   "type": "module",
