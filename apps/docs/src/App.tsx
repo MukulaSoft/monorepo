@@ -85,7 +85,7 @@ export default function App() {
         <h1 className="tw-heading-xl">Design System Packages</h1>
         <p className="tw-text-lead tw-text-muted">
           Reference implementations for UI primitives, hooks, and utility helpers. Everything ships
-          through a single release pipeline backed by Changesets and GitHub Packages.
+          through a single release pipeline backed by semantic-release and GitHub Packages.
         </p>
         <div className="tw-flex tw-flex-wrap tw-gap-3">
           <Button variant="primary" size="lg" onClick={toggleState.toggle}>

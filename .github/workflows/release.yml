@@ -30,8 +30,5 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Create release PR or publish to GitHub Packages
-        uses: changesets/action@v1
-        with:
-          version: pnpm changeset version
-          publish: pnpm publish-packages
+      - name: Run semantic-release
+        run: pnpm release
