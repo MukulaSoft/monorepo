@@ -1,7 +1,8 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
-  "changelog": ["@changesets/cli/changelog", { "repo": "MukulaSoft/monorepo" }],
-  "commit": false,
+  "changelog": [".changeset/changelog.cjs", { "repo": "MukulaSoft/monorepo" }],
+  "commit": true,
+  "commitMessage": "chore(release): version packages",
   "fixed": [],
   "linked": [],
   "access": "restricted",

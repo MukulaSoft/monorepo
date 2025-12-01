@@ -7,14 +7,17 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "styles.css"
   ],
+  "style": "styles.css",
   "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./styles.css": "./styles.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",

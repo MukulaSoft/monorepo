@@ -1,6 +1,5 @@
 import { Button, useToggle } from '@mukulasoft/ui'
 import { clamp, isEmpty } from '@mukulasoft/utils'
-import './App.css'
 
 type PackageMeta = {
   name: string
@@ -56,20 +55,20 @@ const emptinessSamples = [
 
 function PackageCard({ meta }: { meta: PackageMeta }) {
   return (
-    <article className="package-card">
-      <div>
-        <h3>{meta.name}</h3>
-        <p>{meta.description}</p>
+    <article className="tw-card">
+      <div className="tw-flex tw-flex-col tw-gap-2">
+        <h3 className="tw-heading-lg">{meta.name}</h3>
+        <p className="tw-text-muted">{meta.description}</p>
       </div>
       <pre>{meta.install}</pre>
-      <div className="package-commands">
+      <div className="tw-flex tw-flex-col tw-gap-2">
         {meta.commands.map((command) => (
-          <code key={command.command} aria-label={command.label}>
+          <code key={command.command} aria-label={command.label} className="tw-command">
             {command.command}
           </code>
         ))}
       </div>
-      <a className="package-link" href={meta.docsUrl} target="_blank" rel="noreferrer">
+      <a className="tw-link" href={meta.docsUrl} target="_blank" rel="noreferrer">
         View documentation ↗
       </a>
     </article>
@@ -80,15 +79,15 @@ export default function App() {
   const toggleState = useToggle(false)
 
   return (
-    <div className="App">
-      <header>
-        <p className="eyebrow">MukulaSoft Platform</p>
-        <h1>Design System Packages</h1>
-        <p className="lede">
+    <div className="tw-container">
+      <header className="tw-flex tw-flex-col tw-gap-4">
+        <p className="tw-pill">MukulaSoft Platform</p>
+        <h1 className="tw-heading-xl">Design System Packages</h1>
+        <p className="tw-text-lead tw-text-muted">
           Reference implementations for UI primitives, hooks, and utility helpers. Everything ships
           through a single release pipeline backed by Changesets and GitHub Packages.
         </p>
-        <div className="cta-row">
+        <div className="tw-flex tw-flex-wrap tw-gap-3">
           <Button variant="primary" size="lg" onClick={toggleState.toggle}>
             Toggle live demo ({toggleState.value ? 'on' : 'off'})
           </Button>
@@ -98,19 +97,25 @@ export default function App() {
         </div>
       </header>
 
-      <section>
-        <h2>Packages</h2>
-        <div className="packages-grid">
+      <section className="tw-flex tw-flex-col tw-gap-4">
+        <div className="tw-flex tw-flex-col tw-gap-2">
+          <h2 className="tw-heading-lg">Packages</h2>
+          <p className="tw-text-muted">
+            Each workspace ships with linting, Vitest coverage thresholds, and GitHub Packages-ready
+            metadata.
+          </p>
+        </div>
+        <div className="tw-grid tw-grid-auto-fit tw-gap-4">
           {PACKAGES.map((pkg) => (
             <PackageCard key={pkg.name} meta={pkg} />
           ))}
         </div>
       </section>
 
-      <section className="demo">
-        <div>
-          <h3>Clamp helper</h3>
-          <p>Values are normalized to a 0–120 range:</p>
+      <section className="tw-demo-panel">
+        <div className="tw-flex tw-flex-col tw-gap-3">
+          <h3 className="tw-heading-lg">Clamp helper</h3>
+          <p className="tw-text-muted">Values normalized to a 0–120 range:</p>
           <ul>
             {clampSamples.map((sample) => (
               <li key={sample.label}>
@@ -120,9 +125,9 @@ export default function App() {
             ))}
           </ul>
         </div>
-        <div>
-          <h3>isEmpty helper</h3>
-          <p>Runtime guard results:</p>
+        <div className="tw-flex tw-flex-col tw-gap-3">
+          <h3 className="tw-heading-lg">isEmpty helper</h3>
+          <p className="tw-text-muted">Runtime guard results:</p>
           <ul>
             {emptinessSamples.map((sample) => (
               <li key={sample.label}>
