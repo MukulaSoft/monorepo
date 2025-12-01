@@ -2,18 +2,24 @@ import { useEffect, useState } from 'react'
 
 const QUERY = '(prefers-reduced-motion: reduce)'
 
-const canUseDOM = () => typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+const getMediaQuery = () =>
+  typeof globalThis !== 'undefined' && typeof globalThis.matchMedia === 'function'
+    ? globalThis.matchMedia(QUERY)
+    : undefined
 
 export type UsePrefersReducedMotionReturn = boolean
 
 export function usePrefersReducedMotion(): UsePrefersReducedMotionReturn {
-  const getInitialValue = () => (canUseDOM() ? window.matchMedia(QUERY).matches : false)
+  const getInitialValue = () => {
+    const mediaQuery = getMediaQuery()
+    return mediaQuery ? mediaQuery.matches : false
+  }
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(getInitialValue)
 
   useEffect(() => {
-    if (!canUseDOM()) return
+    const mediaQuery = getMediaQuery()
+    if (!mediaQuery) return
 
-    const mediaQuery = window.matchMedia(QUERY)
     const listener = () => setPrefersReducedMotion(mediaQuery.matches)
 
     if (typeof mediaQuery.addEventListener === 'function') {
