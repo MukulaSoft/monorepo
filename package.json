@@ -10,6 +10,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "turbo run test",
+    "changeset": "changeset",
     "publish-packages": "changeset publish"
   },
   "devDependencies": {

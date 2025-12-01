@@ -1,7 +1,25 @@
 {
   "name": "@mukulasoft/design-tokens",
   "version": "0.0.0",
+  "description": "Design tokens consumed by MukulaSoft applications",
+  "private": false,
+  "type": "module",
+  "main": "tokens.json",
   "files": [
     "tokens.json"
-  ]
+  ],
+  "exports": {
+    ".": "./tokens.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MukulaSoft/monorepo.git",
+    "directory": "packages/design-tokens"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "homepage": "https://mukulasoft.github.io/monorepo/",
+  "license": "UNLICENSED"
 }

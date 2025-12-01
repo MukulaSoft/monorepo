@@ -9,6 +9,7 @@
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -20,5 +21,16 @@
     "dev": "tsc -w -p tsconfig.build.json",
     "lint": "eslint \"src/**/*.ts\" --max-warnings=0",
     "test": "vitest run --config vitest.config.ts"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MukulaSoft/monorepo.git",
+    "directory": "packages/utils"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "homepage": "https://mukulasoft.github.io/monorepo/",
+  "license": "UNLICENSED"
 }
