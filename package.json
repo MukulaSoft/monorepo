@@ -14,10 +14,10 @@
     "publish-packages": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.11",
     "@eslint/js": "^9.39.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
-    "changesets": "^1.0.2",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^16.5.0",
