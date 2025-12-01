@@ -1,0 +1,23 @@
+{
+  "name": "@mukulasoft/utils",
+  "version": "0.0.0",
+  "description": "Shared utility helpers for MukulaSoft apps",
+  "private": false,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -w -p tsconfig.build.json",
+    "lint": "eslint \"src/**/*.ts\" --max-warnings=0"
+  }
+}

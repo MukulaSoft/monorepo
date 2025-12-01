@@ -30,8 +30,16 @@ export default defineConfig([
         ...globals.node,
       },
     },
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+    },
     rules: {
       'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+      ],
     },
   },
   eslintConfigPrettier,
