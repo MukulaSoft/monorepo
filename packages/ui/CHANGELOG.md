@@ -4,4 +4,7 @@ All notable changes to this package are tracked here. Update this file manually 
 
 ## Unreleased
 
-- Adopted a semantic-release-based pipeline with conventional commits so versions, tags, and GitHub releases stay automated while this file remains hand-maintained.
+- Added Badge, Card (with header/content/footer primitives), and TextField components that leverage the shared CSS tokens.
+- Expanded `styles.css` with status color tokens, stack/surface utilities, and updated form controls.
+- Introduced the `usePrefersReducedMotion` hook to react to media queries and exported it from the entrypoint.
+- Bootstrapped Storybook (Vite builder) with Button, Badge, Card, and TextField stories for local development.

@@ -6,7 +6,16 @@
   --ms-color-primary: #2563eb;
   --ms-color-primary-strong: #1d4ed8;
   --ms-color-primary-soft: #dbeafe;
+  --ms-color-success: #0f9d58;
+  --ms-color-success-soft: #def7ec;
+  --ms-color-warning: #c2410c;
+  --ms-color-warning-soft: #fef3c7;
+  --ms-color-danger: #dc2626;
+  --ms-color-danger-soft: #fee2e2;
+  --ms-color-info: #0ea5e9;
+  --ms-color-info-soft: #e0f2fe;
   --ms-color-border: #cbd5f5;
+  --ms-color-border-strong: #94a3b8;
   --ms-color-muted: #64748b;
   --ms-color-text: #0f172a;
   --ms-color-accent: #6366f1;
@@ -212,6 +221,31 @@ a {
   font-family: var(--ms-font-mono);
 }
 
+.ms-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+}
+
+.ms-stack--compact {
+  gap: var(--ms-space-2);
+}
+
+.ms-surface {
+  background: var(--ms-color-surface);
+  border-radius: var(--ms-radius-xl);
+  padding: var(--ms-space-6);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: var(--ms-shadow-soft);
+}
+
+.ms-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(15, 23, 42, 0.08);
+  margin-block: var(--ms-space-4);
+}
+
 @media (max-width: 640px) {
   .tw-container {
     padding: 2.5rem 1rem 3rem;
@@ -285,4 +319,230 @@ a {
 .ms-btn--lg {
   font-size: 1.05rem;
   padding: 0.75rem 1.6rem;
+}
+
+/* Badge primitives */
+.ms-badge {
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  display: inline-flex;
+  font-size: 0.7rem;
+  font-weight: 600;
+  gap: var(--ms-space-1);
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.55rem;
+  text-transform: uppercase;
+  transition: background-color 120ms ease;
+}
+
+.ms-badge--soft {
+  background: rgba(15, 23, 42, 0.05);
+  color: var(--ms-color-muted);
+}
+
+.ms-badge--solid {
+  color: var(--ms-color-surface);
+}
+
+.ms-badge--outline {
+  background: transparent;
+  border-color: currentColor;
+}
+
+.ms-badge--tone-neutral.ms-badge--solid {
+  background: var(--ms-color-text);
+}
+
+.ms-badge--tone-neutral.ms-badge--soft {
+  background: rgba(15, 23, 42, 0.08);
+  color: var(--ms-color-text);
+}
+
+.ms-badge--tone-neutral.ms-badge--outline {
+  color: var(--ms-color-text);
+}
+
+.ms-badge--tone-info {
+  color: var(--ms-color-info);
+}
+
+.ms-badge--tone-info.ms-badge--solid {
+  background: var(--ms-color-info);
+  color: var(--ms-color-surface);
+}
+
+.ms-badge--tone-info.ms-badge--soft {
+  background: var(--ms-color-info-soft);
+}
+
+.ms-badge--tone-info.ms-badge--outline {
+  color: var(--ms-color-info);
+}
+
+.ms-badge--tone-success {
+  color: var(--ms-color-success);
+}
+
+.ms-badge--tone-success.ms-badge--solid {
+  background: var(--ms-color-success);
+  color: var(--ms-color-surface);
+}
+
+.ms-badge--tone-success.ms-badge--soft {
+  background: var(--ms-color-success-soft);
+}
+
+.ms-badge--tone-warning {
+  color: var(--ms-color-warning);
+}
+
+.ms-badge--tone-warning.ms-badge--solid {
+  background: var(--ms-color-warning);
+  color: var(--ms-color-surface);
+}
+
+.ms-badge--tone-warning.ms-badge--soft {
+  background: var(--ms-color-warning-soft);
+}
+
+.ms-badge--tone-danger {
+  color: var(--ms-color-danger);
+}
+
+.ms-badge--tone-danger.ms-badge--solid {
+  background: var(--ms-color-danger);
+  color: var(--ms-color-surface);
+}
+
+.ms-badge--tone-danger.ms-badge--soft {
+  background: var(--ms-color-danger-soft);
+}
+
+/* Card primitives */
+.ms-card {
+  background: var(--ms-color-surface);
+  border-radius: var(--ms-radius-xl);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: var(--ms-shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-4);
+  padding: var(--ms-space-6);
+}
+
+.ms-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-2);
+}
+
+.ms-card__title {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.ms-card__description {
+  margin: 0;
+  color: var(--ms-color-muted);
+}
+
+.ms-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-3);
+}
+
+.ms-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ms-space-3);
+  justify-content: flex-end;
+}
+
+/* Form primitives */
+.ms-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ms-space-2);
+}
+
+.ms-field__label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ms-color-text);
+}
+
+.ms-input-shell {
+  align-items: stretch;
+  background: var(--ms-color-surface);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: var(--ms-radius-md);
+  display: flex;
+  gap: 0;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.ms-input-shell:focus-within {
+  border-color: var(--ms-color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.ms-input-shell--error {
+  border-color: var(--ms-color-danger);
+}
+
+.ms-input {
+  background: transparent;
+  border: none;
+  color: var(--ms-color-text);
+  flex: 1;
+  font: inherit;
+  padding: 0.75rem var(--ms-space-3);
+  min-width: 0;
+}
+
+.ms-input:focus {
+  outline: none;
+}
+
+.ms-input::placeholder {
+  color: rgba(100, 116, 139, 0.8);
+}
+
+.ms-input--error::placeholder {
+  color: rgba(220, 38, 38, 0.9);
+}
+
+.ms-input-affix {
+  align-items: center;
+  color: var(--ms-color-muted);
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0 var(--ms-space-3);
+}
+
+.ms-input-shell--with-prefix .ms-input-affix:first-child {
+  border-right: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.ms-input-shell--with-suffix .ms-input-affix:last-child {
+  border-left: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.ms-field__message {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.ms-field__message--hint {
+  color: var(--ms-color-muted);
+}
+
+.ms-field__message--error {
+  color: var(--ms-color-danger);
+  font-weight: 500;
 }
