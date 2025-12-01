@@ -11,71 +11,16 @@ import {
   usePrefersReducedMotion,
 } from '@mukulasoft/ui'
 import './App.css'
+import { LedgerStatus, ledgerService, songRecommenderService } from './services'
 
-const TIMELINE = [
-  {
-    phase: 'Dawn',
-    label: 'Unified homepage',
-    detail: 'A single launchpad for discovery, creator tooling, and playlists built for mood.',
-  },
-  {
-    phase: 'Pulse',
-    label: 'Song recommender',
-    detail: 'Blend lyrics, BPM, and crowd energy to assemble shareable, multi-scene queues.',
-  },
-  {
-    phase: 'Ledger',
-    label: 'Note workspace',
-    detail: 'An Obsidian-inspired canvas with Excel-grade tables for release rituals.',
-  },
-]
+const TIMELINE = songRecommenderService.getTimelinePhases()
+const SONG_CARDS = songRecommenderService.getRecommendedSongs()
+const SONG_SCENARIO = songRecommenderService.getScenarioBlueprint()
+const SONG_BADGE = songRecommenderService.getSignalBadgeLabel()
 
-const SONG_CARDS = [
-  {
-    title: 'Nocturne Grid',
-    artist: 'Alina Mire',
-    bpm: 96,
-    energy: 'Late night synth',
-    tag: 'Focus',
-  },
-  {
-    title: 'Verdant Runners',
-    artist: 'Revolving Light',
-    bpm: 122,
-    energy: 'Organic house',
-    tag: 'Momentum',
-  },
-  {
-    title: 'Hushed Glass',
-    artist: 'Iver + Vale',
-    bpm: 82,
-    energy: 'Analog lo-fi',
-    tag: 'Deep Work',
-  },
-  { title: 'Neon Canopy', artist: 'Still North', bpm: 134, energy: 'Vibrant indie', tag: 'Sprint' },
-]
-
-const NOTE_PANEL = [
-  { title: 'Release retro', body: 'Summaries + linked actions for the last 4 deployments.' },
-  { title: 'Influence matrix', body: 'Cross-team shout-outs mapped to Impact × Effort quadrants.' },
-  { title: 'Mix recipes', body: 'EQ, pedals, and layering settings for studio + live versions.' },
-]
-
-const LEDGER_ROWS = [
-  { title: 'Chorus automation', owner: 'Claire', status: 'active' },
-  { title: 'Sample clearance board', owner: 'Rahul', status: 'blocked' },
-  { title: 'Backstage merch grid', owner: 'Marta', status: 'active' },
-  { title: 'Residency calendar', owner: 'Samuel', status: 'stuck' },
-]
-
-const GRID_METRICS = [
-  { label: 'Sessions', value: '148' },
-  { label: 'Ideas linked', value: '982' },
-  { label: 'Clips', value: '312' },
-  { label: 'Tempo avg', value: '112 BPM' },
-  { label: 'Notes/day', value: '38' },
-  { label: 'Playlists', value: '26' },
-]
+const NOTE_PANEL = ledgerService.getWorkspacePanels()
+const LEDGER_ROWS = ledgerService.getStreams()
+const GRID_METRICS = ledgerService.getGridMetrics()
 
 type ChipProps = {
   label: string
@@ -129,7 +74,7 @@ function App() {
       <section className="glass-panel">
         <div className="section-header">
           <h2>Pulse · Song Recommender</h2>
-          <span className="pill">Signal Engine</span>
+          <span className="pill">{SONG_BADGE}</span>
         </div>
 
         <div className="tw-grid tw-grid-auto-fit tw-gap-4">
@@ -141,23 +86,21 @@ function App() {
               </CardDescription>
             </CardHeader>
             <CardContent className="tw-flex tw-flex-col tw-gap-4">
-              <TextField label="Event" placeholder="Night swim sound check" />
+              <TextField label="Event" placeholder={SONG_SCENARIO.eventLabel} />
               <div className="tw-flex tw-flex-col tw-gap-2">
                 <span className="tw-text-muted">Mood palette</span>
                 <div className="hero__actions">
-                  <Chip label="Deep focus" active />
-                  <Chip label="Elation" />
-                  <Chip label="Analog warm" />
-                  <Chip label="Pulse" />
+                  {SONG_SCENARIO.moodPalette.map((preset) => (
+                    <Chip key={preset.label} label={preset.label} active={preset.active} />
+                  ))}
                 </div>
               </div>
               <div className="tw-flex tw-flex-col tw-gap-2">
                 <span className="tw-text-muted">Energy windows</span>
                 <div className="hero__actions">
-                  <Chip label="80 - 95 BPM" active />
-                  <Chip label="100 - 115 BPM" />
-                  <Chip label="Live acoustic" />
-                  <Chip label="High contrast" />
+                  {SONG_SCENARIO.energyWindows.map((window) => (
+                    <Chip key={window.label} label={window.label} active={window.active} />
+                  ))}
                 </div>
               </div>
             </CardContent>
@@ -241,9 +184,10 @@ function App() {
   )
 }
 
-function cnStatus(state: (typeof LEDGER_ROWS)[number]['status']) {
-  if (state === 'blocked') return 'note-table__status note-table__status--blocked'
-  if (state === 'stuck') return 'note-table__status note-table__status--stuck'
+function cnStatus(state: LedgerStatus) {
+  const tone = ledgerService.describeStatusTone(state)
+  if (tone === 'critical') return 'note-table__status note-table__status--blocked'
+  if (tone === 'warning') return 'note-table__status note-table__status--stuck'
   return 'note-table__status'
 }
 
