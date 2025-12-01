@@ -11,7 +11,7 @@ import {
   usePrefersReducedMotion,
 } from '@mukulasoft/ui'
 import './App.css'
-import { LedgerStatus, ledgerService, songRecommenderService } from './services'
+import { type LedgerStatus, ledgerService, songRecommenderService } from './services'
 
 const TIMELINE = songRecommenderService.getTimelinePhases()
 const SONG_CARDS = songRecommenderService.getRecommendedSongs()
