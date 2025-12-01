@@ -1,3 +1,3 @@
-module.exports = {
-  extends: ['semantic-release-monorepo', '../../release.base.cjs'],
-}
+const createReleaseConfig = require('../../release.base.cjs')
+
+module.exports = createReleaseConfig(__dirname)
