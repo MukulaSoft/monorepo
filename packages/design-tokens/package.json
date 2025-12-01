@@ -1,0 +1,7 @@
+{
+  "name": "@mukulasoft/design-tokens",
+  "version": "0.0.0",
+  "files": [
+    "tokens.json"
+  ]
+}

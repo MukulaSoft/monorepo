@@ -1,0 +1,11 @@
+:root {
+  --muk-bg-dark: #0b0f14;
+  --muk-bg-panel: #0f1720;
+  --muk-primary-neon-pink: #ff2d95;
+  --muk-primary-neon-blue: #4fe0ff;
+  --muk-accent-light-blue: #8ae6ff;
+  --muk-accent-soft-pink: #ff7ab3;
+  --muk-text-muted: #9aa6b2;
+  --muk-text-on-dark: #e6f7ff;
+  --muk-radius-md: 12px;
+}
