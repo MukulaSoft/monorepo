@@ -42,7 +42,7 @@ export type NotificationPreference = {
   channels: NotificationChannels
 }
 
-export type IntegrationService = 'spotify' | 'youtube'
+export type IntegrationService = 'spotify' | 'youtube' | 'custom'
 export type IntegrationStatus = 'connected' | 'disconnected' | 'action_required'
 
 export type Integration = {

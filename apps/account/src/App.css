@@ -351,6 +351,11 @@ body {
   color: #f87171;
 }
 
+.badge--custom {
+  background: rgba(14, 165, 233, 0.15) !important;
+  color: #38bdf8;
+}
+
 .recommendation-card__meta {
   display: flex;
   justify-content: space-between;

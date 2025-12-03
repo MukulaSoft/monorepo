@@ -1,5 +1,14 @@
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from 'react'
 import { initialAccountState } from '../data/account'
+import { fetchAccountState } from '../lib/api'
 import type {
   AccountState,
   IntegrationService,
@@ -41,6 +50,31 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   const [notifications, setNotifications] = useState(initialAccountState.notifications)
   const [integrations, setIntegrations] = useState(initialAccountState.integrations)
   const [recommendations, setRecommendations] = useState(initialAccountState.recommendations)
+
+  // Hydrate the local state from the backend API on mount.
+  useEffect(() => {
+    let cancelled = false
+
+    const hydrateAccount = async () => {
+      try {
+        const nextState = await fetchAccountState()
+        if (cancelled) return
+        setProfile(nextState.profile)
+        setSecurity(nextState.security)
+        setNotifications(nextState.notifications)
+        setIntegrations(nextState.integrations)
+        setRecommendations(nextState.recommendations)
+      } catch (error) {
+        console.error('Failed to hydrate account state', error)
+      }
+    }
+
+    hydrateAccount()
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const updateProfile = useCallback<AccountActions['updateProfile']>((payload) => {
     setProfile((prev) => ({ ...prev, ...payload }))

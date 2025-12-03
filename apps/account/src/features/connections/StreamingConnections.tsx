@@ -11,6 +11,10 @@ const SERVICE_DETAILS: Record<Integration['id'], { accent: string; description: 
     accent: 'badge--youtube',
     description: 'Capture YouTube Music watch history for faster genre cold starts.',
   },
+  custom: {
+    accent: 'badge--custom',
+    description: 'Bring bespoke datasets online via MukulaSoft Connectors.',
+  },
 }
 
 const STATUS_COPY: Record<Integration['status'], string> = {
@@ -41,37 +45,43 @@ export function StreamingConnections() {
       </header>
 
       <div className="connections-grid">
-        {integrations.map((integration) => (
-          <article key={integration.id} className="connection-card">
-            <Badge tone="info" variant="soft" className={SERVICE_DETAILS[integration.id].accent}>
-              {integration.title}
-            </Badge>
-            <h3>{STATUS_COPY[integration.status]}</h3>
-            <p>{SERVICE_DETAILS[integration.id].description}</p>
-            <dl>
-              <div>
-                <dt>Scopes</dt>
-                <dd>{integration.scopes.join(', ')}</dd>
-              </div>
-              <div>
-                <dt>Last sync</dt>
-                <dd>
-                  {integration.lastSync ? new Date(integration.lastSync).toLocaleString() : '—'}
-                </dd>
-              </div>
-            </dl>
-            <div className="connection-card__actions">
-              <Button onClick={() => handlePrimaryAction(integration)}>
-                {integration.status === 'connected' ? 'Disconnect' : 'Connect'}
-              </Button>
-              {integration.status === 'action_required' ? (
-                <Button variant="ghost" onClick={() => actions.connectIntegration(integration.id)}>
-                  Re-authenticate
+        {integrations.map((integration) => {
+          const serviceDetail = SERVICE_DETAILS[integration.id]
+          return (
+            <article key={integration.id} className="connection-card">
+              <Badge tone="info" variant="soft" className={serviceDetail.accent}>
+                {integration.title}
+              </Badge>
+              <h3>{STATUS_COPY[integration.status]}</h3>
+              <p>{serviceDetail.description}</p>
+              <dl>
+                <div>
+                  <dt>Scopes</dt>
+                  <dd>{integration.scopes.join(', ')}</dd>
+                </div>
+                <div>
+                  <dt>Last sync</dt>
+                  <dd>
+                    {integration.lastSync ? new Date(integration.lastSync).toLocaleString() : '—'}
+                  </dd>
+                </div>
+              </dl>
+              <div className="connection-card__actions">
+                <Button onClick={() => handlePrimaryAction(integration)}>
+                  {integration.status === 'connected' ? 'Disconnect' : 'Connect'}
                 </Button>
-              ) : null}
-            </div>
-          </article>
-        ))}
+                {integration.status === 'action_required' ? (
+                  <Button
+                    variant="ghost"
+                    onClick={() => actions.connectIntegration(integration.id)}
+                  >
+                    Re-authenticate
+                  </Button>
+                ) : null}
+              </div>
+            </article>
+          )
+        })}
       </div>
     </section>
   )
