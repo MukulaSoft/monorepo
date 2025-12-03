@@ -51,6 +51,62 @@ export async function fetchAccountState(accountId?: string): Promise<AccountStat
   return mapAccountResponse(payload)
 }
 
+async function mutateIntegration(
+  service: IntegrationService,
+  action: 'connect' | 'disconnect',
+  accountId = DEFAULT_ACCOUNT_ID,
+): Promise<Integration> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/accounts/${accountId}/integrations/${service}/${action}`,
+    {
+      method: 'POST',
+    },
+  )
+
+  if (!response.ok) {
+    throw new Error(`Failed to ${action} ${service} (${response.status})`)
+  }
+
+  const payload = (await response.json()) as ApiIntegration
+  return mapIntegration(payload)
+}
+
+export async function connectIntegrationService(
+  service: IntegrationService,
+  accountId?: string,
+): Promise<Integration> {
+  return mutateIntegration(service, 'connect', accountId)
+}
+
+export async function disconnectIntegrationService(
+  service: IntegrationService,
+  accountId?: string,
+): Promise<Integration> {
+  return mutateIntegration(service, 'disconnect', accountId)
+}
+
+type RecommendationRefreshResponse = {
+  status: string
+  message: string
+}
+
+export async function queueRecommendationRefresh(
+  accountId = DEFAULT_ACCOUNT_ID,
+): Promise<RecommendationRefreshResponse> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/accounts/${accountId}/recommendations/refresh`,
+    {
+      method: 'POST',
+    },
+  )
+
+  if (!response.ok) {
+    throw new Error(`Failed to refresh recommendations (${response.status})`)
+  }
+
+  return (await response.json()) as RecommendationRefreshResponse
+}
+
 function mapAccountResponse(payload: AccountApiResponse): AccountState {
   return {
     profile: mapProfile(payload),
@@ -121,7 +177,7 @@ function mapNotification(preference: ApiNotificationPreference): NotificationPre
   }
 }
 
-function mapIntegration(integration: ApiIntegration): Integration {
+export function mapIntegration(integration: ApiIntegration): Integration {
   const service = integration.service as IntegrationService
   return {
     id: service,

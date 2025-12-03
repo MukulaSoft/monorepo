@@ -1,4 +1,6 @@
+import { Button } from '@mukulasoft/ui'
 import { NavLink, Outlet } from 'react-router-dom'
+import { useAccount } from '../context/account-context'
 
 const NAV_ITEMS = [
   {
@@ -29,6 +31,8 @@ const NAV_ITEMS = [
 ]
 
 export function AccountLayout() {
+  const { hydration, actions } = useAccount()
+
   return (
     <div className="layout">
       <aside className="layout__sidebar">
@@ -54,8 +58,62 @@ export function AccountLayout() {
         </nav>
       </aside>
       <main className="layout__content">
+        <HydrationBanner hydration={hydration} onRetry={actions.reloadAccount} />
         <Outlet />
       </main>
+    </div>
+  )
+}
+
+type HydrationBannerProps = {
+  hydration: ReturnType<typeof useAccount>['hydration']
+  onRetry: () => Promise<void>
+}
+
+function HydrationBanner({ hydration, onRetry }: HydrationBannerProps) {
+  if (hydration.status === 'ready') return null
+
+  const isError = hydration.status === 'error'
+  const isLoading = hydration.status === 'loading'
+  const statusLabel = isError
+    ? 'Sync failed'
+    : isLoading
+      ? 'Hydrating account'
+      : 'Syncing latest data'
+  const description = isError
+    ? (hydration.error ?? 'Unable to load account data.')
+    : isLoading
+      ? 'Loading account details from MukulaSoft Cloud.'
+      : 'Refreshing account details with your latest activity.'
+
+  const role = isError ? 'alert' : 'status'
+  const ariaLive = isError ? 'assertive' : 'polite'
+
+  return (
+    <div
+      className={`hydration-banner ${isError ? 'hydration-banner--error' : 'hydration-banner--active'}`}
+      role={role}
+      aria-live={ariaLive}
+    >
+      <div className="hydration-banner__status">
+        <span
+          className={
+            isError
+              ? 'hydration-banner__indicator hydration-banner__indicator--error'
+              : 'hydration-banner__indicator'
+          }
+          aria-hidden="true"
+        />
+        <div>
+          <strong>{statusLabel}</strong>
+          <p>{description}</p>
+        </div>
+      </div>
+      {isError ? (
+        <Button variant="ghost" size="sm" onClick={() => void onRetry()}>
+          Retry
+        </Button>
+      ) : null}
     </div>
   )
 }

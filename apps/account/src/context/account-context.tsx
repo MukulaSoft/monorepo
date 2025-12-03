@@ -8,7 +8,12 @@ import {
   type ReactNode,
 } from 'react'
 import { initialAccountState } from '../data/account'
-import { fetchAccountState } from '../lib/api'
+import {
+  connectIntegrationService,
+  disconnectIntegrationService,
+  fetchAccountState,
+  queueRecommendationRefresh,
+} from '../lib/api'
 import type {
   AccountState,
   IntegrationService,
@@ -33,16 +38,21 @@ type AccountActions = {
     preferenceId: string,
     cadence: NotificationPreference['cadence'],
   ) => void
-  connectIntegration: (service: IntegrationService) => void
-  disconnectIntegration: (service: IntegrationService) => void
-  refreshRecommendations: () => void
+  connectIntegration: (service: IntegrationService) => Promise<void>
+  disconnectIntegration: (service: IntegrationService) => Promise<void>
+  refreshRecommendations: () => Promise<void>
+  reloadAccount: () => Promise<void>
 }
 
-type AccountContextValue = AccountState & { actions: AccountActions }
+type HydrationState = {
+  status: 'loading' | 'refreshing' | 'ready' | 'error'
+  error: string | null
+  lastUpdated: string | null
+}
+
+type AccountContextValue = AccountState & { hydration: HydrationState; actions: AccountActions }
 
 const AccountContext = createContext<AccountContextValue | null>(null)
-
-const randomConfidence = () => Number((0.6 + Math.random() * 0.35).toFixed(2))
 
 export function AccountProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState(initialAccountState.profile)
@@ -50,31 +60,51 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   const [notifications, setNotifications] = useState(initialAccountState.notifications)
   const [integrations, setIntegrations] = useState(initialAccountState.integrations)
   const [recommendations, setRecommendations] = useState(initialAccountState.recommendations)
+  const [hydration, setHydration] = useState<HydrationState>({
+    status: 'loading',
+    error: null,
+    lastUpdated: null,
+  })
+
+  const applyAccountSnapshot = useCallback((nextState: AccountState) => {
+    setProfile(nextState.profile)
+    setSecurity(nextState.security)
+    setNotifications(nextState.notifications)
+    setIntegrations(nextState.integrations)
+    setRecommendations(nextState.recommendations)
+  }, [])
+
+  const loadAccountState = useCallback(
+    async (mode: 'initial' | 'refetch' = 'initial') => {
+      setHydration((prev) => ({
+        status: mode === 'initial' ? 'loading' : 'refreshing',
+        error: null,
+        lastUpdated: prev.lastUpdated,
+      }))
+
+      try {
+        const nextState = await fetchAccountState()
+        applyAccountSnapshot(nextState)
+        const hydratedAt = new Date().toISOString()
+        setHydration({ status: 'ready', error: null, lastUpdated: hydratedAt })
+        return nextState
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Failed to load account data'
+        setHydration((prev) => ({
+          status: 'error',
+          error: message,
+          lastUpdated: prev.lastUpdated,
+        }))
+        throw error
+      }
+    },
+    [applyAccountSnapshot],
+  )
 
   // Hydrate the local state from the backend API on mount.
   useEffect(() => {
-    let cancelled = false
-
-    const hydrateAccount = async () => {
-      try {
-        const nextState = await fetchAccountState()
-        if (cancelled) return
-        setProfile(nextState.profile)
-        setSecurity(nextState.security)
-        setNotifications(nextState.notifications)
-        setIntegrations(nextState.integrations)
-        setRecommendations(nextState.recommendations)
-      } catch (error) {
-        console.error('Failed to hydrate account state', error)
-      }
-    }
-
-    hydrateAccount()
-
-    return () => {
-      cancelled = true
-    }
-  }, [])
+    void loadAccountState('initial')
+  }, [loadAccountState])
 
   const updateProfile = useCallback<AccountActions['updateProfile']>((payload) => {
     setProfile((prev) => ({ ...prev, ...payload }))
@@ -127,44 +157,46 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     [],
   )
 
-  const connectIntegration = useCallback<AccountActions['connectIntegration']>((service) => {
-    const now = new Date().toISOString()
-    setIntegrations((prev) =>
-      prev.map((integration) =>
-        integration.id === service
-          ? {
-              ...integration,
-              status: 'connected',
-              connectedAt: now,
-              lastSync: now,
-            }
-          : integration,
-      ),
-    )
-  }, [])
+  const connectIntegration = useCallback<AccountActions['connectIntegration']>(
+    async (service) => {
+      try {
+        await connectIntegrationService(service)
+        await loadAccountState('refetch')
+      } catch (error) {
+        console.error(`Failed to connect integration ${service}`, error)
+      }
+    },
+    [loadAccountState],
+  )
 
-  const disconnectIntegration = useCallback<AccountActions['disconnectIntegration']>((service) => {
-    setIntegrations((prev) =>
-      prev.map((integration) =>
-        integration.id === service
-          ? {
-              ...integration,
-              status: 'disconnected',
-              connectedAt: undefined,
-              lastSync: undefined,
-            }
-          : integration,
-      ),
-    )
-  }, [])
+  const disconnectIntegration = useCallback<AccountActions['disconnectIntegration']>(
+    async (service) => {
+      try {
+        await disconnectIntegrationService(service)
+        await loadAccountState('refetch')
+      } catch (error) {
+        console.error(`Failed to disconnect integration ${service}`, error)
+      }
+    },
+    [loadAccountState],
+  )
 
-  const refreshRecommendations = useCallback<AccountActions['refreshRecommendations']>(() => {
-    setRecommendations((prev) =>
-      prev
-        .map((item) => ({ ...item, confidence: randomConfidence() }))
-        .sort((a, b) => b.confidence - a.confidence),
-    )
-  }, [])
+  const refreshRecommendations = useCallback<AccountActions['refreshRecommendations']>(async () => {
+    try {
+      await queueRecommendationRefresh()
+      await loadAccountState('refetch')
+    } catch (error) {
+      console.error('Failed to refresh recommendations', error)
+    }
+  }, [loadAccountState])
+
+  const reloadAccount = useCallback<AccountActions['reloadAccount']>(async () => {
+    try {
+      await loadAccountState('initial')
+    } catch (error) {
+      console.error('Failed to reload account state', error)
+    }
+  }, [loadAccountState])
 
   const value = useMemo<AccountContextValue>(
     () => ({
@@ -173,6 +205,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       notifications,
       integrations,
       recommendations,
+      hydration,
       actions: {
         updateProfile,
         setTwoFactor,
@@ -185,6 +218,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
         connectIntegration,
         disconnectIntegration,
         refreshRecommendations,
+        reloadAccount,
       },
     }),
     [
@@ -193,6 +227,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       notifications,
       integrations,
       recommendations,
+      hydration,
       updateProfile,
       setTwoFactor,
       toggleLoginAlerts,
@@ -204,6 +239,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       connectIntegration,
       disconnectIntegration,
       refreshRecommendations,
+      reloadAccount,
     ],
   )
 
