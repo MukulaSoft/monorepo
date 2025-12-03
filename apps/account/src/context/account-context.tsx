@@ -103,7 +103,11 @@ export function AccountProvider({ children }: { children: ReactNode }) {
 
   // Hydrate the local state from the backend API on mount.
   useEffect(() => {
-    void loadAccountState('initial')
+    const frame = requestAnimationFrame(() => {
+      void loadAccountState('initial')
+    })
+
+    return () => cancelAnimationFrame(frame)
   }, [loadAccountState])
 
   const updateProfile = useCallback<AccountActions['updateProfile']>((payload) => {
